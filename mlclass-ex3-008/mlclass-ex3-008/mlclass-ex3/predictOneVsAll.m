@@ -30,11 +30,14 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+%size(all_theta)
+%size(X)
+temp = X * all_theta';
+%kNum = 1 : num_labels;
 
+[M, I] = max(temp, [], 2);
 
-
-
-
+p = I;
 
 % =========================================================================
 

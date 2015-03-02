@@ -36,11 +36,32 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+xTheta = X * theta;
+h = sigmoid(xTheta);
+%fprintf('size(h) is %d \n', size(h));
+%fprintf('size(y) is %d \n', size(y));
+jSum = -(y .* log(h)) - (1.0 - y) .* (log(1.0 - h));
 
+%% be ware that theta(1) should not be considered when calculate J.
+tempT = theta;
+tempT(1) = 0;
+J = sum(jSum)/m + lambda * sum(tempT .^ 2) / (2 * m);
 
+B = h - y;
+gSum = X' * B;
+%fprintf('size(gSum) is %d \n', size(gSum));
+%fprintf('size(theta) is %d \n', size(theta));
+%fprintf('size(grad) is %d \n', size(grad));
+%fprintf('m = %d, \n', m);
 
+temp = theta;
+temp(1) = 0;
+temp = temp * lambda / m;
+grad = gSum / m;
 
-
+grad = grad + temp;
+%grad(2:end) = grad(2:end) + (lambda / m) * theta(2:end);
+ 
 
 
 

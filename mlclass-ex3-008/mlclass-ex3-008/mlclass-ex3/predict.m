@@ -21,12 +21,21 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+%fprintf('size(Theta1) is %d \n', size(Theta1));
+%fprintf('size(Theta2) is %d \n', size(Theta2));
+X = [ones(size(X, 1), 1), X];
+%fprintf('size(X) is %d \n', size(X));
+pTemp = X * Theta1';
+%pTemp = [ones(size(pTemp, 1), 1), pTemp];
+%fprintf('size(pTemp) is %d \n', size(pTemp));
 
+z2 = sigmoid(pTemp);
+z2 = [ones(size(z2, 1), 1), z2];
+pTemp2 = z2 * Theta2';
+%fprintf('size(pTemp2) is %d \n', size(pTemp2));
+[M, I] = max(pTemp2, [], 2);
 
-
-
-
-
+p = I;
 
 
 % =========================================================================
